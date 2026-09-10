@@ -37,7 +37,7 @@ export const aboutCards = [
 
 export const experience = [
   {
-    title: "Java Full Stack Web Development Trainee",
+    title: "Java Full Stack Web Development Trainee (Intern)",
     subtitle: "with Integrated AI",
     company: "Tap Academy",
     period: "May 2026 - Nov 2026",

@@ -18,7 +18,7 @@ export default function Navbar() {
         const el = document.getElementById(sections[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 150) {
+          if (rect.top <= 160) {
             setActiveSection(sections[i]);
             break;
           }
@@ -48,95 +48,102 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -90, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-4xl lg:max-w-5xl xl:max-w-6xl rounded-full transition-all duration-500 ${
           scrolled
-            ? 'bg-white/80 backdrop-blur-xl shadow-soft-md border border-surface-200/60'
-            : 'bg-transparent'
-        } rounded-2xl px-6 py-3 max-w-5xl w-[calc(100%-2rem)]`}
+            ? 'bg-[#0B0D14]/80 backdrop-blur-xl border border-white/[0.08] shadow-soft-md'
+            : 'bg-[#080910]/40 backdrop-blur-md border border-white/[0.06]'
+        }`}
       >
-        <div className="flex items-center justify-between">
+        {/* Animated RGB top accent line */}
+        <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/60 to-transparent rgb-hue" />
+
+        <div className="relative flex items-center justify-between px-3 sm:px-5 h-14">
+          {/* Brand */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 shrink-0"
           >
-            <div className="w-9 h-9 rounded-xl bg-ink-800 flex items-center justify-center text-white font-bold text-sm tracking-tight group-hover:bg-accent-indigo transition-colors duration-300">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm tracking-tight shadow-glow">
               {personalInfo.shortName}
             </div>
-            <span className="hidden sm:block font-semibold text-ink-800 text-sm tracking-tight">
+            <span className="hidden sm:block font-semibold text-ink-700 text-[15px] tracking-tight">
               {personalInfo.name.split(' ').slice(-1)[0]}
             </span>
           </a>
 
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative px-3 py-1.5 text-[13px] font-medium rounded-lg transition-all duration-300 ${
-                  activeSection === link.href.replace('#', '')
-                    ? 'text-accent-indigo'
-                    : 'text-ink-400 hover:text-ink-700'
-                }`}
-              >
-                {link.label}
-                {activeSection === link.href.replace('#', '') && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute inset-0 bg-accent-indigo/8 rounded-lg"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </a>
-            ))}
+          {/* Centered links */}
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-0.5">
+            {navLinks.map((link) => {
+              const active = activeSection === link.href.replace('#', '');
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`relative rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors duration-300 ${
+                    active ? 'text-white' : 'text-ink-400 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <motion.span
+                      layoutId="activeNav"
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400 rgb-hue"
+                    />
+                  )}
+                </a>
+              );
+            })}
           </div>
 
-          <div className="hidden lg:block">
+          {/* Right controls */}
+          <div className="flex items-center gap-2">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-ink-800 text-white text-[13px] font-semibold rounded-xl hover:bg-accent-indigo transition-all duration-300 hover:shadow-lg hover:shadow-accent-indigo/20"
+              className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.06] border border-white/10 text-[13px] font-semibold text-ink-800 hover:bg-white/[0.1] hover:border-indigo-300/40 hover:shadow-glow transition-all duration-300"
             >
               Let's Connect
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:translate-x-0.5 transition-transform">
-                <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-          </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-200 transition-colors"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          >
-            <AnimatePresence mode="wait">
-              {mobileOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X size={20} className="text-ink-700" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu size={20} className="text-ink-700" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-ink-700 transition-colors hover:bg-white/[0.08]"
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            >
+              <AnimatePresence mode="wait">
+                {mobileOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={20} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -147,7 +154,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-surface-50/95 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-40 bg-[#080910]/95 backdrop-blur-2xl lg:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-2 px-8">
               {navLinks.map((link, i) => (
@@ -161,8 +168,8 @@ export default function Navbar() {
                   transition={{ delay: i * 0.05, duration: 0.3 }}
                   className={`text-2xl font-semibold py-3 px-6 rounded-xl transition-colors ${
                     activeSection === link.href.replace('#', '')
-                      ? 'text-accent-indigo bg-accent-indigo/8'
-                      : 'text-ink-600 hover:text-ink-800'
+                      ? 'text-white bg-white/[0.06]'
+                      : 'text-ink-400 hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -175,7 +182,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
-                className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-ink-800 text-white font-semibold rounded-xl"
+                className="mt-4 inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 text-white font-semibold shadow-glow"
               >
                 Let's Connect
               </motion.a>

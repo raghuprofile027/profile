@@ -22,7 +22,6 @@ export default function CursorHighlight() {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!visible) setVisible(true);
     };
-
     const handleLeave = () => setVisible(false);
     const handleEnter = () => setVisible(true);
 
@@ -41,23 +40,23 @@ export default function CursorHighlight() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-[400px] h-[400px] pointer-events-none z-30"
+      className="fixed top-0 left-0 w-[520px] h-[520px] pointer-events-none z-[5] mix-blend-screen"
       animate={{
-        x: position.x - 200,
-        y: position.y - 200,
+        x: position.x - 260,
+        y: position.y - 260,
         opacity: visible ? 1 : 0,
       }}
       transition={{
         type: 'spring',
-        damping: 30,
-        stiffness: 200,
-        mass: 0.5,
+        damping: 32,
+        stiffness: 180,
+        mass: 0.6,
       }}
     >
       <div
-        className="w-full h-full rounded-full"
+        className="rgb-hue-slow w-full h-full rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(79, 70, 229, 0.04) 0%, rgba(124, 58, 237, 0.02) 30%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,140,190,0.10) 0%, rgba(139,92,246,0.06) 35%, transparent 70%)',
         }}
       />
     </motion.div>

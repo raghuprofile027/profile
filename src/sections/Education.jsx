@@ -3,25 +3,16 @@ import { motion, useInView } from 'framer-motion';
 import { GraduationCap, MapPin, Calendar } from 'lucide-react';
 import { education } from '../data/portfolio';
 import SectionReveal from '../components/SectionReveal';
+import SectionHeading from '../components/SectionHeading';
 
 export default function Education() {
   const lineRef = useRef(null);
   const lineInView = useInView(lineRef, { once: true, margin: '-100px' });
 
   return (
-    <section id="education" className="py-24 lg:py-32 bg-surface-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <SectionReveal>
-          <div className="max-w-3xl mb-16">
-            <span className="text-[12px] font-semibold text-accent-indigo tracking-widest uppercase mb-3 block">
-              Education
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight mb-4">
-              Education
-            </h2>
-            <div className="w-16 h-1 bg-accent-indigo rounded-full" />
-          </div>
-        </SectionReveal>
+    <section id="education" className="relative py-24 lg:py-32">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <SectionHeading eyebrow="Education" title="Education" />
 
         <div className="relative max-w-3xl">
           {/* Timeline line */}
@@ -30,10 +21,7 @@ export default function Education() {
               initial={{ scaleY: 0 }}
               animate={lineInView ? { scaleY: 1 } : { scaleY: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full origin-top"
-              style={{
-                background: 'linear-gradient(to bottom, #7C3AED, #D97706, transparent)',
-              }}
+              className="w-full h-full origin-top rounded-full bg-gradient-to-b from-fuchsia-500 via-amber-400 to-cyan-400 rgb-hue"
             />
           </div>
 
@@ -45,14 +33,15 @@ export default function Education() {
                   initial={{ scale: 0 }}
                   animate={lineInView ? { scale: 1 } : { scale: 0 }}
                   transition={{ delay: 0.4 + i * 0.2, duration: 0.4, type: 'spring', bounce: 0.4 }}
-                  className="absolute left-4 lg:left-6 top-1 w-5 h-5 rounded-full bg-white border-[3px] border-accent-violet z-10"
+                  className="absolute left-4 lg:left-6 top-1 w-5 h-5 rounded-full bg-[#0B0D14] border-2 border-amber-400 z-10"
+                  style={{ boxShadow: '0 0 14px rgba(251,191,36,0.55)' }}
                 />
 
-                <div className="p-6 lg:p-8 rounded-2xl bg-white border border-surface-200/80 shadow-soft hover:shadow-soft-md transition-all duration-300">
+                <div className="glass-card glow-hover p-6 lg:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">
-                        <GraduationCap size={16} className="text-accent-violet shrink-0" strokeWidth={1.8} />
+                        <GraduationCap size={16} className="text-fuchsia-300 shrink-0" strokeWidth={1.8} />
                         <h3 className="text-lg font-bold text-ink-800">{edu.degree}</h3>
                       </div>
                       <p className="text-[14px] text-ink-600 font-medium mb-1">{edu.institution}</p>
@@ -71,10 +60,10 @@ export default function Education() {
                     {/* Highlight badge */}
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="text-center px-5 py-3 rounded-xl bg-gradient-to-br from-accent-violet/8 to-accent-indigo/8 border border-accent-violet/12"
+                      className="text-center px-5 py-3 rounded-xl bg-gradient-to-br from-fuchsia-500/15 to-indigo-500/10 border border-fuchsia-400/20"
                     >
                       <p className="text-2xl font-extrabold text-ink-800">{edu.highlight}</p>
-                      <p className="text-[11px] font-semibold text-accent-violet uppercase tracking-wider mt-0.5">
+                      <p className="text-[11px] font-semibold text-gradient-eyebrow uppercase tracking-wider mt-0.5">
                         {edu.highlightLabel}
                       </p>
                     </motion.div>

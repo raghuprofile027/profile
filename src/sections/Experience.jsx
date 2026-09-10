@@ -3,25 +3,16 @@ import { motion, useInView } from 'framer-motion';
 import { Briefcase, Calendar } from 'lucide-react';
 import { experience } from '../data/portfolio';
 import SectionReveal from '../components/SectionReveal';
+import SectionHeading from '../components/SectionHeading';
 
 export default function Experience() {
   const lineRef = useRef(null);
   const lineInView = useInView(lineRef, { once: true, margin: '-100px' });
 
   return (
-    <section id="experience" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <SectionReveal>
-          <div className="max-w-3xl mb-16">
-            <span className="text-[12px] font-semibold text-accent-indigo tracking-widest uppercase mb-3 block">
-              Career
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight mb-4">
-              Experience
-            </h2>
-            <div className="w-16 h-1 bg-accent-indigo rounded-full" />
-          </div>
-        </SectionReveal>
+    <section id="experience" className="relative py-24 lg:py-32">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <SectionHeading eyebrow="Career" title="Experience" />
 
         <div className="relative max-w-3xl">
           {/* Timeline line */}
@@ -30,10 +21,7 @@ export default function Experience() {
               initial={{ scaleY: 0 }}
               animate={lineInView ? { scaleY: 1 } : { scaleY: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full origin-top"
-              style={{
-                background: 'linear-gradient(to bottom, #4F46E5, #7C3AED, transparent)',
-              }}
+              className="w-full h-full origin-top rounded-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400 rgb-hue"
             />
           </div>
 
@@ -45,15 +33,16 @@ export default function Experience() {
                   initial={{ scale: 0 }}
                   animate={lineInView ? { scale: 1 } : { scale: 0 }}
                   transition={{ delay: 0.5 + i * 0.2, duration: 0.4, type: 'spring', bounce: 0.4 }}
-                  className="absolute left-4 lg:left-6 top-1 w-5 h-5 rounded-full bg-white border-[3px] border-accent-indigo z-10"
+                  className="absolute left-4 lg:left-6 top-1 w-5 h-5 rounded-full bg-[#0B0D14] border-2 border-fuchsia-400 z-10"
+                  style={{ boxShadow: '0 0 14px rgba(232,121,249,0.7)' }}
                 />
 
-                <div className="p-6 lg:p-8 rounded-2xl bg-surface-50 border border-surface-200/80 shadow-soft hover:shadow-soft-md transition-all duration-300">
+                <div className="glass-card glow-hover p-6 lg:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                     <div>
                       <h3 className="text-xl font-bold text-ink-800">{exp.title}</h3>
                       {exp.subtitle && (
-                        <p className="text-[14px] text-accent-indigo font-medium mt-0.5">{exp.subtitle}</p>
+                        <p className="text-[14px] text-gradient-eyebrow font-medium mt-0.5">{exp.subtitle}</p>
                       )}
                     </div>
                   </div>
@@ -77,7 +66,7 @@ export default function Experience() {
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-[12px] font-medium text-accent-indigo bg-accent-indigo/8 border border-accent-indigo/12 rounded-lg"
+                        className="px-3 py-1 text-[12px] font-medium text-indigo-300 bg-indigo-500/10 border border-indigo-400/20 rounded-lg"
                       >
                         {tech}
                       </span>

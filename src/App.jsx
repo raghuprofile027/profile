@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import CursorHighlight from './components/CursorHighlight';
+import BackgroundFX from './components/BackgroundFX';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Experience from './sections/Experience';
@@ -15,7 +16,7 @@ import Footer from './sections/Footer';
 function LoadingScreen() {
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-surface-50 flex items-center justify-center"
+      className="fixed inset-0 z-[100] bg-[#080910] flex items-center justify-center"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
@@ -29,7 +30,7 @@ function LoadingScreen() {
           initial={{ width: 0 }}
           animate={{ width: 64 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="h-[3px] bg-accent-indigo rounded-full mx-auto mb-6"
+          className="h-[3px] rounded-full mx-auto mb-6 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 rgb-hue"
         />
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -58,21 +59,24 @@ export default function App() {
         {loading && <LoadingScreen />}
       </AnimatePresence>
 
-      <CursorHighlight />
+      <div className="relative min-h-screen">
+        <BackgroundFX />
+        <CursorHighlight />
 
-      <div className="relative">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Education />
-          <Certification />
-          <Contact />
-        </main>
-        <Footer />
+        <div className="relative z-10">
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Experience />
+            <Projects />
+            <Skills />
+            <Education />
+            <Certification />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
       </div>
     </MotionConfig>
   );

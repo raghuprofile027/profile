@@ -12,43 +12,160 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+  background-color: #080910;
 }
 
 body {
   font-family: 'Manrope', 'Inter', system-ui, sans-serif;
-  background-color: #FDFCFB;
-  color: #1A1A1A;
+  background-color: #080910;
+  color: #E2E6F0;
   overflow-x: hidden;
   line-height: 1.7;
 }
 
 ::selection {
-  background-color: rgba(79, 70, 229, 0.15);
-  color: #1A1A1A;
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #F4F5FA;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F6F3;
+  background: #0B0D14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CCCCCC;
-  border-radius: 3px;
+  background: #23283A;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #999999;
+  background: #39405A;
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #4F46E5;
+  outline: 2px solid #818CF8;
   outline-offset: 2px;
   border-radius: 8px;
+}
+
+/* ---------- RGB ambient system ---------- */
+
+@keyframes hueCycle {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes spinConic {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes gradientShift {
+  to {
+    background-position: 300% 0;
+  }
+}
+@keyframes drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(45px, -30px) scale(1.08);
+  }
+}
+@keyframes driftAlt {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 28px) scale(1.05);
+  }
+}
+
+.rgb-hue {
+  animation: hueCycle 30s linear infinite;
+}
+.rgb-hue-slow {
+  animation: hueCycle 46s linear infinite;
+}
+.drift-rgb {
+  animation: drift 24s ease-in-out infinite, hueCycle 34s linear infinite;
+}
+.drift-alt-rgb {
+  animation: driftAlt 28s ease-in-out infinite, hueCycle 42s linear infinite;
+}
+
+.text-gradient-name {
+  background: linear-gradient(115deg, #F6F6FA 0%, #C7D2FE 28%, #E9D5FF 50%, #F5D0FE 70%, #F6F6FA 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientShift 9s ease-in-out infinite alternate;
+}
+
+.text-gradient-eyebrow {
+  background: linear-gradient(90deg, #A5B4FC, #C084FC, #67E8F9, #A5B4FC);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientShift 10s linear infinite;
+}
+
+.rgb-ring {
+  position: relative;
+}
+.rgb-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  z-index: 2;
+  background: conic-gradient(from 0deg, #ff0055, #ff00a0, #7a00ff, #0055ff, #00bbff, #00ffc8, #ffee00, #ff8800, #ff0055);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.9;
+  animation: spinConic 14s linear infinite;
+  pointer-events: none;
+}
+
+.rgb-border-soft {
+  position: relative;
+}
+.rgb-border-soft::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  z-index: 2;
+  background: conic-gradient(from 0deg, rgba(255,0,85,0.55), rgba(255,0,160,0.45), rgba(122,0,255,0.55), rgba(0,85,255,0.5), rgba(0,187,255,0.45), rgba(0,255,200,0.4), rgba(255,238,0,0.45), rgba(255,136,0,0.5), rgba(255,0,85,0.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.4;
+  animation: spinConic 24s linear infinite;
+  pointer-events: none;
+}
+
+.glass-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
 @layer utilities {

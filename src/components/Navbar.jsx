@@ -51,7 +51,7 @@ export default function Navbar() {
         initial={{ y: -90, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-4xl lg:max-w-5xl xl:max-w-6xl rounded-full transition-all duration-500 ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl lg:max-w-6xl xl:max-w-7xl rounded-full transition-all duration-500 ${
           scrolled
             ? 'bg-[#0B0D14]/80 backdrop-blur-xl border border-white/[0.08] shadow-soft-md'
             : 'bg-[#080910]/40 backdrop-blur-md border border-white/[0.06]'
@@ -60,12 +60,12 @@ export default function Navbar() {
         {/* Animated RGB top accent line */}
         <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/60 to-transparent rgb-hue" />
 
-        <div className="relative flex items-center justify-between px-3 sm:px-5 h-14">
-          {/* Brand */}
+        <div className="relative grid grid-cols-[1fr_auto_1fr] items-center px-5 h-14">
+          {/* Brand — left column, left-aligned */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2.5 shrink-0"
+            className="flex items-center gap-2.5 shrink-0 justify-start"
           >
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm tracking-tight shadow-glow">
               {personalInfo.shortName}
@@ -75,8 +75,8 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Centered links */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-0.5">
+          {/* Navigation links — center column, always at 50% of viewport */}
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const active = activeSection === link.href.replace('#', '');
               return (
@@ -101,8 +101,8 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right controls */}
-          <div className="flex items-center gap-2">
+          {/* Right controls — right column, right-aligned */}
+          <div className="flex items-center justify-end gap-2">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}

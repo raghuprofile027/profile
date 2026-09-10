@@ -107,8 +107,8 @@ export default function Hero() {
         </svg>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Right on mobile-first order: photo then text on mobile */}
           {/* Profile photo */}
           <div className="order-1 lg:order-2">

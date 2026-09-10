@@ -51,7 +51,7 @@ export default function Navbar() {
         initial={{ y: -90, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl lg:max-w-6xl xl:max-w-7xl rounded-full transition-all duration-500 ${
+        className={`fixed top-4 z-50 w-[calc(100%-2rem)] max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto rounded-full transition-all duration-500 ${
           scrolled
             ? 'bg-[#0B0D14]/80 backdrop-blur-xl border border-white/[0.08] shadow-soft-md'
             : 'bg-[#080910]/40 backdrop-blur-md border border-white/[0.06]'
